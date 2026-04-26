@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>for salma💜</title>
+<link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@300;400;500;700;900&family=Amiri:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+/* ═══════════════════════════════════════
+   RESET & ROOT
+═══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --pink:     #f472b6;
+  --pink-dim: rgba(244,114,182,0.35);
+  --purple:   #c084fc;
+  --purple-d: #7c3aed;
+  --violet:   #a78bfa;
+  --gold:     #fcd34d;
+  --bg1:      #0c0018;
+  --bg2:      #130028;
+  --bg3:      #1a003a;
+  --glass:    rgba(255,255,255,0.06);
+  --glass-b:  rgba(255,255,255,0.13);
+  --text:     #f0e8ff;
+  --muted:    rgba(240,232,255,0.55);
+  --radius:   22px;
+}
+
+html { scroll-behavior: smooth; }
+html, body {
+  min-height: 100%;
+  font-family: 'Tajawal', sans-serif;
+  color: var(--text);
+  direction: rtl;
+  overflow-x: hidden;
+}
+body {
+  background: radial-gradient(ellipse at 20% 10%, #1e003f 0%, var(--bg1) 60%),
+              linear-gradient(180deg, var(--bg1) 0%, var(--bg2) 50%, var(--bg3) 100%);
+  display: flex;
+  justify-content: center;
+  min-height: 100vh;
+}
+
+/* ═══════════════════════════════════════
+   PARTICLE CANVAS
+═══════════════════════════════════════ */
+#bg-canvas {
+  position: fixed; inset: 0;
+  pointer-events: none; z-index: 0;
+}
+
+/* ═══════════════════════════════════════
+   LOCK SCREEN
+═══════════════════════════════════════ */
+#lock-screen {
+  position: fixed; inset: 0; z-index: 2000;
+  display: flex; align-items: center; justify-content: center;
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(124,58,237,0.25) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 80%, rgba(244,114,182,0.15) 0%, transparent 55%),
+    linear-gradient(160deg, #0c0018 0%, #130028 55%, #1a003a 100%);
+  transition: opacity 1s ease, visibility 1s ease;
+}
+#lock-screen.hidden { opacity: 0; visibility: hidden; pointer-events: none; }
+
+.lock-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-b);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border-radius: 30px;
+  padding: 48px 32px 40px;
+  width: min(360px, 93vw);
+  text-align: center;
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.05) inset,
+    0 8px 80px rgba(124,58,237,0.2);
+  position: relative; overflow: hidden;
+}
+.lock-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(192,132,252,0.6), transparent);
+}
+
+.lock-emoji {
+  font-size: 3.5rem; display: block; margin-bottom: 14px;
+  animation: float-lock 3s ease-in-out infinite;
+}
+@keyframes float-lock {
+  0%,100% { transform: translateY(0) rotate(-3deg); }
+  50%      { transform: translateY(-8px) rotate(3deg); }
+}
+
+.lock-title {
+  font-size: 2rem; font-weight: 900;
+  background: linear-gradient(135deg, var(--violet), var(--pink), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  margin-bottom: 6px; line-height: 1.2;
+}
+.lock-sub {
+  font-size: 0.88rem; color: var(--muted);
+  margin-bottom: 30px; font-weight: 300; line-height: 1.6;
+}
+
+.dropdowns-row {
+  display: flex; gap: 8px; flex-direction: row-reverse;
+  margin-bottom: 20px;
+}
+.drop-group { flex: 1; display: flex; flex-direction: column; gap: 5px; }
+.drop-group label { font-size: 0.72rem; color: var(--muted); text-align: center; }
+
+select {
+  background: rgba(124,58,237,0.12);
+  border: 1px solid rgba(192,132,252,0.25);
+  color: var(--text);
+  font-family: 'Tajawal', sans-serif;
+  font-size: 0.92rem; font-weight: 500;
+  padding: 11px 6px; border-radius: 12px;
+  outline: none; cursor: pointer;
+  appearance: none; text-align: center;
+  transition: border-color 0.3s, background 0.3s;
+  width: 100%;
+}
+select option { background: #1a003a; color: var(--text); }
+select:focus { border-color: var(--violet); background: rgba(124,58,237,0.2); }
+
+.btn-unlock {
+  background: linear-gradient(135deg, var(--purple-d) 0%, #9d174d 100%);
+  border: none; color: #fff;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1.05rem; font-weight: 700;
+  padding: 14px 32px; border-radius: 50px;
+  cursor: pointer; width: 100%; letter-spacing: 0.5px;
+  box-shadow: 0 4px 28px rgba(124,58,237,0.45);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.btn-unlock:hover { transform: translateY(-2px); box-shadow: 0 8px 36px rgba(124,58,237,0.6); }
+.btn-unlock:active { transform: translateY(0); }
+
+.lock-error {
+  margin-top: 14px; font-size: 0.83rem;
+  color: #fb7185; min-height: 22px;
+  transition: all 0.3s; font-weight: 500;
+}
+
+/* ═══════════════════════════════════════
+   MAIN APP
+═══════════════════════════════════════ */
+#app {
+  position: relative; z-index: 1;
+  width: 100%; max-width: 400px;
+  min-height: 100vh;
+  overflow-y: auto; overflow-x: hidden;
+  scrollbar-width: none; padding-bottom: 80px;
+}
+#app::-webkit-scrollbar { display: none; }
+
+/* ═══════════════════════════════════════
+   REVEAL ANIMATION 
+═══════════════════════════════════════ */
+.reveal {
+  opacity: 0;
+  transform: translateY(60px) scale(0.7); 
+  filter: blur(10px); 
+  transition: opacity 1s cubic-bezier(0.22,1,0.36,1),
+              transform 1s cubic-bezier(0.22,1,0.36,1),
+              filter 1s cubic-bezier(0.22,1,0.36,1);
+}
+.reveal.visible { 
+    opacity: 1; 
+    transform: scale(1) translateY(0); 
+    filter: blur(0); 
+}
+
+/* ═══════════════════════════════════════
+   SECTIONS
+═══════════════════════════════════════ */
+.section { 
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 18px; 
+  width: 100%;
+}
+
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--glass-b), transparent);
+  margin: 80px 20px; 
+}
+
+/* ═══════════════════════════════════════
+   GLASS CARD & SEQ CARDS
+═══════════════════════════════════════ */
+.glass-card {
+  background: var(--glass);
+  border: 1px solid var(--glass-b);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-radius: var(--radius);
+  padding: 28px 22px;
+  position: relative; overflow: hidden;
+  box-shadow: 0 4px 40px rgba(0,0,0,0.3);
+  width: 100%;
+}
+.glass-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(192,132,252,0.4), transparent);
+}
+
+.seq-card {
+  background: rgba(255,255,255,0.06);
+  border: 1px solid var(--glass-b);
+  border-radius: 16px; 
+  padding: 25px; 
+  margin: 35px 0; 
+  text-align: center; font-size: 1.25rem; font-weight: 700;
+  cursor: pointer; transition: transform 0.3s, background 0.3s, opacity 0.5s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+  backdrop-filter: blur(10px);
+  width: 90%;
+}
+.seq-card:hover { transform: scale(1.03); background: rgba(255,255,255,0.1); }
+
+.section-title {
+  font-size: 1.55rem; font-weight: 800;
+  color: var(--purple);
+  text-align: center; margin-bottom: 18px;
+}
+.section-sub {
+  font-size: 0.86rem; color: var(--muted);
+  text-align: center; margin-bottom: 18px;
+  line-height: 1.7; font-weight: 300;
+}
+
+/* ═══════════════════════════════════════
+   INTRO
+═══════════════════════════════════════ */
+#intro {
+  min-height: 100vh;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  text-align: center;
+  opacity: 1 !important; transform: none !important; filter: none !important;
+}
+.intro-eyebrow {
+  font-size: 0.9rem; font-weight: 300;
+  color: var(--muted); letter-spacing: 3px;
+  margin-bottom: 8px;
+}
+.intro-name {
+  font-family: 'Amiri', serif;
+  font-size: 6rem; font-weight: 700; line-height: 1;
+  background: linear-gradient(135deg, var(--violet), var(--pink), var(--gold));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  animation: name-glow 3.5s ease-in-out infinite;
+  margin-bottom: 16px;
+}
+@keyframes name-glow {
+  0%,100% { filter: drop-shadow(0 0 18px rgba(244,114,182,0.4)); }
+  50%      { filter: drop-shadow(0 0 50px rgba(167,139,250,0.75)); }
+}
+.intro-tagline {
+  font-size: 1rem; color: var(--muted);
+  line-height: 1.8; max-width: 280px; font-weight: 300;
+}
+.scroll-hint {
+  margin-top: 44px;
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+}
+.scroll-hint span {
+  font-size: 0.75rem; color: var(--muted); letter-spacing: 2px;
+}
+.arrow-anim {
+  width: 18px; height: 18px;
+  border-right: 2px solid var(--pink);
+  border-bottom: 2px solid var(--pink);
+  transform: rotate(45deg);
+  animation: arrow-bounce 1.5s ease-in-out infinite;
+}
+@keyframes arrow-bounce {
+  0%,100% { transform: rotate(45deg) translateY(0); opacity: 0.5; }
+  50%      { transform: rotate(45deg) translateY(6px); opacity: 1; }
+}
+
+/* ═══════════════════════════════════════
+   COUNTER
+═══════════════════════════════════════ */
+.counter-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;
+}
+.counter-cell {
+  background: rgba(124,58,237,0.14);
+  border: 1px solid rgba(192,132,252,0.22);
+  border-radius: 16px; padding: 20px 8px 16px;
+  text-align: center;
+  transition: transform 0.3s;
+}
+.counter-cell:hover { transform: translateY(-3px); }
+.counter-num {
+  font-size: 2.4rem; font-weight: 900;
+  background: linear-gradient(180deg, var(--violet), var(--pink));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  line-height: 1;
+}
+.counter-label {
+  font-size: 0.7rem; color: var(--muted);
+  margin-top: 6px; letter-spacing: 1px; font-weight: 500;
+}
+.counter-heart {
+  text-align: center; font-size: 1.8rem;
+  margin-top: 18px; animation: pulse-h 2s ease-in-out infinite;
+}
+@keyframes pulse-h { 0%,100%{transform:scale(1)} 50%{transform:scale(1.2)} }
+
+/* ═══════════════════════════════════════
+   FLIP CARDS
+═══════════════════════════════════════ */
+.flip-grid {
+  display: grid; 
+  grid-template-columns: 1fr 1fr; 
+  gap: 15px;
+  width: 100%;
+}
+.flip-outer {
+  height: 180px; perspective: 900px; cursor: pointer; width: 100%;
+}
+.flip-inner {
+  width: 100%; height: 100%;
+  transform-style: preserve-3d;
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  position: relative;
+}
+.flip-outer.flipped .flip-inner { transform: rotateY(180deg); }
+
+.flip-front, .flip-back {
+  position: absolute; inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  border-radius: 16px;
+  display: flex; align-items: center; justify-content: center;
+  text-align: center; padding: 14px;
+}
+.flip-front {
+  background: rgba(124,58,237,0.15);
+  border: 1px solid rgba(192,132,252,0.28);
+  flex-direction: column; gap: 8px;
+}
+.flip-front .card-num { font-size: 2.8rem; line-height: 1; }
+.flip-front .tap-hint { font-size: 0.68rem; color: var(--muted); }
+.flip-back {
+  background: linear-gradient(145deg, rgba(244,114,182,0.18), rgba(124,58,237,0.22));
+  border: 1px solid rgba(244,114,182,0.3);
+  transform: rotateY(180deg);
+  font-family: 'Amiri', serif;
+  font-size: 0.95rem; color: var(--text);
+  line-height: 1.6; font-style: italic;
+}
+
+/* ═══════════════════════════════════════
+   SCRATCH CARD
+═══════════════════════════════════════ */
+.scratch-container {
+  position: relative; border-radius: 18px; overflow: hidden; width: 100%;
+}
+.scratch-reveal {
+  background: linear-gradient(135deg, rgba(244,114,182,0.12), rgba(124,58,237,0.18));
+  border: 1px solid var(--glass-b);
+  padding: 36px 20px;
+  text-align: center;
+  font-family: 'Amiri', serif;
+  font-size: 1.1rem; font-style: italic;
+  color: var(--pink); line-height: 1.8;
+  border-radius: 18px; 
+  min-height: 220px; 
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  width: 100%;
+}
+#scratch-canvas {
+  position: absolute; inset: 0;
+  border-radius: 18px; cursor: crosshair; touch-action: none;
+}
+.scratch-hint {
+  text-align: center; margin-top: 12px;
+  font-size: 0.78rem; color: var(--muted);
+}
+
+/* ═══════════════════════════════════════
+   TRICKY BUTTON
+═══════════════════════════════════════ */
+#tricky-section {
+  min-height: 100vh;
+  position: relative; padding: 60px 20px;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+}
+#tricky-section .guide-text {
+  font-size: 1.2rem; color: var(--muted); margin-bottom: 20px; font-weight: 700;
+}
+#tricky-btn {
+  position: relative; 
+  background: linear-gradient(135deg, var(--purple-d), #be185d);
+  border: none; color: #fff;
+  font-family: 'Tajawal', sans-serif;
+  font-size: 1rem; font-weight: 700;
+  padding: 16px 32px; border-radius: 50px;
+  cursor: pointer; white-space: nowrap;
+  box-shadow: 0 4px 24px rgba(244,114,182,0.4);
+  transition: transform 0.18s cubic-bezier(0.4,0,0.2,1),
+              background 0.6s;
+  user-select: none;
+}
+
+/* ═══════════════════════════════════════
+   ENDING SCREEN
+═══════════════════════════════════════ */
+#ending-screen {
+  display: none; position: fixed; inset: 0; z-index: 3000;
+  flex-direction: column; align-items: center; justify-content: center;
+  text-align: center;
+  background:
+    radial-gradient(ellipse at 50% 40%, rgba(124,58,237,0.3) 0%, transparent 65%),
+    radial-gradient(ellipse at 50% 80%, rgba(244,114,182,0.15) 0%, transparent 60%),
+    linear-gradient(160deg, #0c0018, #130028, #1a003a);
+  padding: 24px; overflow-y: auto;
+}
+#ending-screen.active { display: flex; }
+
+#heart-canvas-wrap {
+  position: relative; width: 300px; height: 280px;
+  margin: 0 auto 16px; flex-shrink: 0;
+}
+.h-dot {
+  position: absolute; width: 9px; height: 9px;
+  border-radius: 50%;
+  opacity: 0; transform: scale(0);
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+
+#ending-content {
+  opacity: 0; transform: translateY(20px);
+  transition: opacity 1.2s ease, transform 1.2s ease;
+  max-width: 320px; margin: 0 auto;
+}
+#ending-content.visible { opacity: 1; transform: none; }
+
+.ending-title {
+  font-family: 'Amiri', serif;
+  font-size: 2.2rem; font-weight: 700;
+  color: var(--pink); margin-bottom: 14px;
+  text-shadow: 0 0 40px rgba(244,114,182,0.5);
+}
+.ending-message {
+  font-size: 0.92rem; color: var(--muted);
+  line-height: 1.9; margin-bottom: 26px; font-weight: 300;
+}
+.ending-photo {
+  width: 120px; height: 120px;
+  border-radius: 50%; object-fit: cover;
+  border: 3px solid var(--pink);
+  box-shadow: 0 0 0 6px rgba(244,114,182,0.15),
+              0 0 40px rgba(244,114,182,0.5);
+  display: block; margin: 0 auto;
+}
+
+@media (max-width: 420px) {
+  .lock-card { padding: 38px 18px 30px; }
+  .intro-name { font-size: 5rem; }
+}
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<audio id="bg-audio" loop preload="auto">
+  <source src="song.mp3" type="audio/mpeg">
+</audio>
+
+<div id="lock-screen">
+  <div class="lock-card">
+    <span class="lock-emoji">🤫</span>
+    <h1 class="lock-title">مكان ليكي يا سلمى وبس</h1>
+    <p class="lock-sub">
+      ايه هو تاريخ ميلادي?! 👇
+    </p>
+    <div class="dropdowns-row">
+      <div class="drop-group">
+        <label for="l-day">اليوم</label>
+        <select id="l-day"><option value="">—</option></select>
+      </div>
+      <div class="drop-group">
+        <label for="l-month">الشهر</label>
+        <select id="l-month">
+          <option value="">—</option>
+          <option value="1">1</option><option value="2">2</option>
+          <option value="3">3</option><option value="4">4</option>
+          <option value="5">5</option><option value="6">6</option>
+          <option value="7">7</option><option value="8">8</option>
+          <option value="9">9</option><option value="10">10</option>
+          <option value="11">11</option><option value="12">12</option>
+        </select>
+      </div>
+      <div class="drop-group">
+        <label for="l-year">السنة</label>
+        <select id="l-year"><option value="">—</option></select>
+      </div>
+    </div>
+    <button class="btn-unlock" onclick="attemptUnlock()">✨ دخول</button>
+    <div class="lock-error" id="lock-error"></div>
+  </div>
+</div>
+
+<div id="app" style="display:none;">
+
+  <section class="section" id="intro">
+    <div class="intro-eyebrow">This is for you</div>
+    <div class="intro-name">salma</div>
+    <p class="intro-tagline">
+      أجمل شخص شفته في حياتي<br>
+      I hope you stay with me💜
+    </p>
+    <div class="scroll-hint">
+      <span>كملي لتحت</span>
+      <div class="arrow-anim"></div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section reveal" id="sec-counter">
+    <div class="glass-card" id="guess-container">
+      <div class="section-title">🤔 خمني التاريخ</div>
+      <p class="section-sub" id="guess-sub">امتى اول مره اتقابلنا فيها؟ ليكي <span id="attempts-left" style="color:var(--pink); font-weight:bold;">3</span> محاولات!</p>
+      
+      <div id="guess-ui">
+        <div class="dropdowns-row" style="margin-bottom: 15px;">
+          <div class="drop-group">
+            <select id="g-day"><option value="">اليوم</option></select>
+          </div>
+          <div class="drop-group">
+            <select id="g-month">
+                <option value="">الشهر</option>
+                <option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option>
+                <option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option>
+            </select>
+          </div>
+          <div class="drop-group">
+            <select id="g-year"><option value="">السنة</option></select>
+          </div>
+        </div>
+        <button class="btn-unlock" onclick="checkGuess()" style="padding: 10px 20px; font-size: 1rem;">تخمين ✨</button>
+        <div id="guess-error" class="lock-error"></div>
+      </div>
+
+      <div id="result-ui" style="display: none; text-align:center;">
+        <p id="result-msg" style="font-size: 1.15rem; font-weight: 700; margin-bottom: 20px;"></p>
+        <div class="section-title" style="font-size: 1.3rem;">⏳ معًا منذ 13-11-2024</div>
+        <div class="counter-grid">
+          <div class="counter-cell">
+            <div class="counter-num" id="cnt-years">0</div>
+            <div class="counter-label">سنوات</div>
+          </div>
+          <div class="counter-cell">
+            <div class="counter-num" id="cnt-months">0</div>
+            <div class="counter-label">أشهر</div>
+          </div>
+          <div class="counter-cell">
+            <div class="counter-num" id="cnt-days">0</div>
+            <div class="counter-label">أيام</div>
+          </div>
+        </div>
+        <div class="counter-heart">💜</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section reveal">
+    <div class="section-title">👇 استني اقرأي المكتوب هنا</div>
+    <div class="seq-card" id="card1" onclick="showNextCard(2)">انتِ (اضغطي هنا) ✨</div>
+    <div class="seq-card" id="card2" style="display:none; opacity:0;" onclick="showNextCard(3)">أفضل شخص (كملي ضغط)</div>
+    <div class="seq-card" id="card3" style="display:none; opacity:0;">في حياتي 💜</div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section reveal">
+    <div class="glass-card" style="text-align: center;">
+      <p id="magic-text" style="font-size: 1.1rem; margin-bottom: 15px; font-weight:bold; line-height:1.5;">في حاجه مهمه هنا لازم تعرفيها..</p>
+      <button class="btn-unlock" id="magic-btn" onclick="showMagicMessage()" style="padding: 10px 20px; width:auto; font-size: 0.95rem;">اضغطي هنا عشان تعرفي</button>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section reveal" id="sec-flip">
+    <div class="section-title">💌 اقلبي البطاقات بالترتيب</div>
+    <div class="flip-grid">
+      <div class="flip-outer" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="card-num">١</div><div class="tap-hint">اضغطي</div></div>
+          <div class="flip-back">«ضحكتكِ هي أجمل صوت سمعته في حياتي، أتمنى أسمعه كل يوم»</div>
+        </div>
+      </div>
+      <div class="flip-outer" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="card-num">٢</div><div class="tap-hint">اضغطي</div></div>
+          <div class="flip-back">«لو أُعيد الوقت ألف مرة، سأختارك في كل مرة دون تردد»</div>
+        </div>
+      </div>
+      <div class="flip-outer" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="card-num">٣</div><div class="tap-hint">اضغطي</div></div>
+          <div class="flip-back">«معكِ حتى الأيام العادية تصبح ذكريات لا تُنسى 🌸»</div>
+        </div>
+      </div>
+      <div class="flip-outer" onclick="this.classList.toggle('flipped')">
+        <div class="flip-inner">
+          <div class="flip-front"><div class="card-num">٤</div><div class="tap-hint">اضغطي</div></div>
+          <div class="flip-back">«كل لحظة أقضيها معكِ، أشعر أنني أعيش في حلم جميل لا أريد أن ينتهي»</div>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section reveal" id="sec-scratch">
+    <div class="glass-card">
+      <div class="section-title">🪄 امسحي الطبقة دي بصباعك</div>
+      <div class="scratch-container">
+        <div class="scratch-reveal" id="scratch-hidden-text">
+          💜<br><br>
+          «أنتِ أجمل ما حدث لي،<br>
+          ووجودكِ في حياتي<br>
+          هو أغلى هديةٍ تلقيتها»<br><br>
+          💜
+        </div>
+        <canvas id="scratch-canvas"></canvas>
+      </div>
+    </div>
+  </section>
+
+  <div class="divider"></div>
+
+  <section class="section reveal" id="tricky-section">
+    <p class="guide-text">وصلنا للنهايه خلاص</p>
+    <button id="tricky-btn">اذهبي للنهاية ✨</button>
+  </section>
+
+</div><div id="ending-screen">
+  <div id="heart-canvas-wrap"></div>
+  <div id="ending-content">
+    <div class="ending-title">💜 شكرًا لانك معايا</div>
+    <p class="ending-message">
+      كل سنه وانتي طيبه💜💜<br>
+      <br>
+      كل كلمة هنا هي جزءٌ صغير<br>
+      مما تعنيه لي في الحقيقة. 🌙
+    </p>
+    <img class="ending-photo" src="photo.jpg" alt="أنتِ 💜"
+         onerror="this.style.display='none'">
+  </div>
+</div>
+
+<script>
+'use strict';
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   PARTICLE BACKGROUND
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(function initParticles() {
+  const canvas = document.getElementById('bg-canvas');
+  const ctx    = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width  = window.innerWidth;
+    H = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const rnd = (a, b) => Math.random() * (b - a) + a;
+
+  class Star {
+    constructor(init) { this.reset(init); }
+    reset(init) {
+      this.x  = rnd(0, W);
+      this.y  = init ? rnd(0, H) : H + 10;
+      this.r  = rnd(0.6, 2.0);
+      this.sp = rnd(0.08, 0.5);
+      this.al = rnd(0.15, 0.85);
+      this.tw = rnd(0, Math.PI * 2);
+      this.ts = rnd(0.015, 0.055);
+    }
+    update() {
+      this.y  -= this.sp;
+      this.tw += this.ts;
+      if (this.y < -5) this.reset(false);
+    }
+    draw() {
+      const a = this.al * (0.5 + 0.5 * Math.sin(this.tw));
+      ctx.globalAlpha = a;
+      ctx.fillStyle   = '#e8d8ff';
+      ctx.beginPath();
+      ctx.arc(this.x, this.y, this.r, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+
+  class FloatHeart {
+    constructor(init) { this.reset(init); }
+    reset(init) {
+      this.x  = rnd(0, W);
+      this.y  = init ? rnd(0, H) : H + 25;
+      this.sz = rnd(8, 18);
+      this.sp = rnd(0.1, 0.4);
+      this.al = rnd(0.08, 0.45);
+      this.tw = rnd(0, Math.PI * 2);
+      this.ts = rnd(0.008, 0.035);
+      this.dr = rnd(-0.18, 0.18);
+    }
+    update() {
+      this.y  -= this.sp;
+      this.x  += this.dr * 0.15;
+      this.tw += this.ts;
+      if (this.y < -25) this.reset(false);
+    }
+    draw() {
+      const a = this.al * (0.5 + 0.5 * Math.sin(this.tw));
+      ctx.globalAlpha = a;
+      ctx.font        = `${this.sz}px serif`;
+      ctx.fillStyle   = `rgba(244,114,182,${a})`;
+      ctx.fillText('♥', this.x, this.y);
+    }
+  }
+
+  const items = [];
+  for (let i = 0; i < 70; i++) items.push(new Star(true));
+  for (let i = 0; i < 28; i++) items.push(new FloatHeart(true));
+
+  (function loop() {
+    ctx.clearRect(0, 0, W, H);
+    items.forEach(p => { p.update(); p.draw(); });
+    ctx.globalAlpha = 1;
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   BUILD DROPDOWNS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+(function buildDropdowns() {
+  const dayEl  = document.getElementById('l-day');
+  const yearEl = document.getElementById('l-year');
+  for (let d = 1; d <= 31; d++) {
+    const o = document.createElement('option');
+    o.value = d; o.textContent = d;
+    dayEl.appendChild(o);
+  }
+  for (let y = 1990; y <= new Date().getFullYear(); y++) {
+    const o = document.createElement('option');
+    o.value = y; o.textContent = y;
+    yearEl.appendChild(o);
+  }
+
+  const gDay = document.getElementById('g-day');
+  const gYear = document.getElementById('g-year');
+  for(let i=1; i<=31; i++) gDay.innerHTML += `<option value="${i}">${i}</option>`;
+  for(let i=2020; i<=2026; i++) gYear.innerHTML += `<option value="${i}">${i}</option>`;
+})();
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LOCK SCREEN LOGIC
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const LOCK_DAY   = 9;
+const LOCK_MONTH = 8;
+const LOCK_YEAR  = 2011;
+
+function attemptUnlock() {
+  const d = parseInt(document.getElementById('l-day').value);
+  const m = parseInt(document.getElementById('l-month').value);
+  const y = parseInt(document.getElementById('l-year').value);
+  const errEl = document.getElementById('lock-error');
+
+  if (!d || !m || !y) {
+    errEl.textContent = '⚠️ الرجاء اختيار اليوم والشهر والسنة';
+    return;
+  }
+
+  if (d === LOCK_DAY && m === LOCK_MONTH && y === LOCK_YEAR) {
+    document.getElementById('lock-screen').classList.add('hidden');
+    const app = document.getElementById('app');
+    app.style.display = 'block';
+    document.getElementById('bg-audio').play().catch(() => {});
+    setTimeout(() => {
+      document.getElementById('lock-screen').style.display = 'none';
+    }, 1000);
+    initApp();
+  } else {
+    errEl.textContent = 'التاريخ غلط.. ركزي 😉';
+    setTimeout(() => { errEl.textContent = ''; }, 2800);
+  }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   APP INITIALISATION
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function initApp() {
+  startCounter();
+  setTimeout(setupScratchCard, 100); 
+  setupTrickyButton();
+  initScrollReveal();
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   GUESSING GAME LOGIC
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+let attemptsLeft = 3;
+function checkGuess() {
+    const d = document.getElementById('g-day').value;
+    const m = document.getElementById('g-month').value;
+    const y = document.getElementById('g-year').value;
+    const err = document.getElementById('guess-error');
+
+    if(!d || !m || !y) { 
+        err.textContent = 'اختاري التاريخ كامل الأول!'; 
+        return; 
+    }
+
+    if(d === "13" && m === "11" && y === "2024") {
+        document.getElementById('guess-ui').style.display = 'none';
+        document.getElementById('guess-sub').style.display = 'none';
+        const msg = document.getElementById('result-msg');
+        msg.textContent = 'بجد انا مبسوط جدا انك عارفه 💜';
+        msg.style.color = '#a78bfa';
+        document.getElementById('result-ui').style.display = 'block';
+    } else {
+        attemptsLeft--;
+        if(attemptsLeft > 0) {
+            document.getElementById('attempts-left').textContent = attemptsLeft;
+            err.textContent = `غلط.. ركزي شوية! 😉 فاضل ${attemptsLeft} محاولة`;
+        } else {
+            document.getElementById('guess-ui').style.display = 'none';
+            document.getElementById('guess-sub').style.display = 'none';
+            const msg = document.getElementById('result-msg');
+            msg.textContent = 'ازاي متعرفيش 😞';
+            msg.style.color = '#f472b6';
+            document.getElementById('result-ui').style.display = 'block';
+        }
+    }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   LIVE COUNTER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+const ORIGIN_DATE = new Date('2024-11-13');
+function startCounter() {
+  function update() {
+    const now = new Date();
+    let yr = now.getFullYear() - ORIGIN_DATE.getFullYear();
+    let mo = now.getMonth()    - ORIGIN_DATE.getMonth();
+    let da = now.getDate()     - ORIGIN_DATE.getDate();
+    if (da < 0) {
+      mo--;
+      da += new Date(now.getFullYear(), now.getMonth(), 0).getDate();
+    }
+    if (mo < 0) { yr--; mo += 12; }
+    document.getElementById('cnt-years').textContent  = yr;
+    document.getElementById('cnt-months').textContent = mo;
+    document.getElementById('cnt-days').textContent   = da;
+  }
+  update();
+  setInterval(update, 60000);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SEQUENTIAL & MAGIC CARDS
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function showNextCard(num) {
+    const card = document.getElementById(`card${num}`);
+    if(card) {
+        card.style.display = 'block';
+        setTimeout(() => { card.style.opacity = '1'; }, 50);
+        if(num === 2) document.getElementById('card1').innerText = "انتِ";
+        if(num === 3) document.getElementById('card2').innerText = "أفضل شخص";
+    }
+}
+
+let magicClicks = 0;
+const magicMessages = ["وجودك بيهون عليا حاجات كتير ✨", "ضحكتك بتغير يومي للأحسن 💖", "مهما حصل هتفضلي أعز حد ليا 💜"];
+function showMagicMessage() {
+    if(magicClicks < magicMessages.length) {
+        document.getElementById('magic-text').innerText = magicMessages[magicClicks];
+        magicClicks++;
+        if(magicClicks === magicMessages.length) { document.getElementById('magic-btn').style.display = 'none'; }
+    }
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   SCRATCH CARD 
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function setupScratchCard() {
+  const canvas = document.getElementById('scratch-canvas');
+  const hidden = document.getElementById('scratch-hidden-text');
+  const ctx    = canvas.getContext('2d');
+
+  function sizeAndDraw() {
+    const w = hidden.offsetWidth;
+    const h = hidden.offsetHeight;
+    
+    canvas.width  = w;
+    canvas.height = h;
+    canvas.style.width  = '100%';
+    canvas.style.height = '100%';
+
+    const grd = ctx.createLinearGradient(0, 0, w, h);
+    grd.addColorStop(0,   '#3b0764');
+    grd.addColorStop(0.5, '#5b21b6');
+    grd.addColorStop(1,   '#6d28d9');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, w, h);
+
+    for (let i = 0; i < 55; i++) {
+      ctx.globalAlpha = Math.random() * 0.35;
+      ctx.fillStyle   = '#e9d5ff';
+      ctx.beginPath();
+      ctx.arc(Math.random() * w, Math.random() * h, Math.random() * 1.4, 0, Math.PI * 2);
+      ctx.fill();
+    }
+    ctx.globalAlpha = 1;
+
+    ctx.fillStyle   = 'rgba(255,255,255,0.88)';
+    ctx.font        = 'bold 18px Tajawal, sans-serif';
+    ctx.textAlign   = 'center';
+    ctx.direction   = 'rtl';
+    ctx.fillText('اخربشي هنا ✨', w / 2, h / 2 + 6);
+  }
+
+  sizeAndDraw();
+
+  let painting = false;
+
+  function getXY(e) {
+    const r   = canvas.getBoundingClientRect();
+    const src = e.touches ? e.touches[0] : e;
+    const scaleX = canvas.width / r.width;
+    const scaleY = canvas.height / r.height;
+    return { 
+        x: (src.clientX - r.left) * scaleX, 
+        y: (src.clientY - r.top) * scaleY 
+    };
+  }
+
+  function scratchAt(e) {
+    if (!painting) return;
+    const { x, y } = getXY(e);
+    ctx.globalCompositeOperation = 'destination-out';
+    ctx.beginPath();
+    ctx.arc(x, y, 32, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.globalCompositeOperation = 'source-over';
+  }
+
+  canvas.addEventListener('mousedown',  e => { painting = true; scratchAt(e); });
+  canvas.addEventListener('mousemove',  scratchAt);
+  canvas.addEventListener('mouseup',    () => painting = false);
+  canvas.addEventListener('mouseleave', () => painting = false);
+  canvas.addEventListener('touchstart', e => { e.preventDefault(); painting = true; scratchAt(e); }, { passive: false });
+  canvas.addEventListener('touchmove',  e => { e.preventDefault(); scratchAt(e); }, { passive: false });
+  canvas.addEventListener('touchend',   () => painting = false);
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   TRICKY BUTTON
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function setupTrickyButton() {
+  const btn     = document.getElementById('tricky-btn');
+  const section = document.getElementById('tricky-section');
+  let escapes   = 0;
+
+  function flee(e) {
+    if (escapes >= 3) return;
+
+    const wRect = section.getBoundingClientRect();
+    const bRect = btn.getBoundingClientRect();
+
+    const mx = (e.clientX ?? e.touches?.[0]?.clientX ?? 0) - wRect.left;
+    const my = (e.clientY ?? e.touches?.[0]?.clientY ?? 0) - wRect.top;
+
+    const bx   = bRect.left - wRect.left + bRect.width  / 2;
+    const by   = bRect.top  - wRect.top  + bRect.height / 2;
+    const dx   = bx - mx;
+    const dy   = by - my;
+    const dist = Math.sqrt(dx * dx + dy * dy) || 1;
+    const push = 100;
+
+    let nx = (dx / dist) * push;
+    let ny = (dy / dist) * push;
+
+    btn.style.transform = `translate(${nx}px, ${ny}px)`;
+    escapes++;
+
+    if (escapes >= 3) {
+      setTimeout(() => {
+        btn.textContent = 'خلاص مسكتيني 😂 هاتي النهاية';
+        btn.removeEventListener('mouseover', flee);
+        btn.removeEventListener('touchstart', flee);
+        btn.addEventListener('click', triggerEnding);
+      }, 200);
+    }
+  }
+
+  btn.addEventListener('mouseover', flee);
+  btn.addEventListener('touchstart', flee, { passive: true });
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   INTERSECTION OBSERVER
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function initScrollReveal() {
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+}
+
+/* ━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+   ENDING SCREEN
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━ */
+function triggerEnding() {
+  document.getElementById('app').style.display = 'none';
+  const ending = document.getElementById('ending-screen');
+  ending.classList.add('active');
+  drawHeartAnimation();
+}
+
+function drawHeartAnimation() {
+  const wrap      = document.getElementById('heart-canvas-wrap');
+  wrap.innerHTML  = '';
+
+  const DOT_COUNT = 80;
+  const CX = 150, CY = 148, SCALE = 10;
+
+  for (let i = 0; i < DOT_COUNT; i++) {
+    const t  = (i / DOT_COUNT) * 2 * Math.PI;
+    const hx = SCALE * (16 * Math.pow(Math.sin(t), 3));
+    const hy = -SCALE * (
+      13 * Math.cos(t)
+      - 5 * Math.cos(2 * t)
+      - 2 * Math.cos(3 * t)
+      -     Math.cos(4 * t)
+    );
+
+    const dot       = document.createElement('div');
+    dot.className   = 'h-dot';
+    dot.style.left  = (CX + hx - 4.5) + 'px';
+    dot.style.top   = (CY + hy - 4.5) + 'px';
+
+    const hue           = 290 + (i / DOT_COUNT) * 80;
+    dot.style.background = `hsl(${hue}, 92%, 70%)`;
+    dot.style.boxShadow  = `0 0 10px hsl(${hue},92%,68%), 0 0 22px hsl(${hue},92%,50%)`;
+
+    wrap.appendChild(dot);
+
+    setTimeout(() => {
+      dot.style.opacity   = '1';
+      dot.style.transform = 'scale(1)';
+    }, i * 38);
+  }
+
+  setTimeout(() => {
+    document.getElementById('ending-content').classList.add('visible');
+  }, DOT_COUNT * 38 + 500);
+}
+</script>
+</body>
+</html>
